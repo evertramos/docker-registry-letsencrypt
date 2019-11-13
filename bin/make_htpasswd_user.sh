@@ -1,8 +1,9 @@
 #!/bin/bash
 
+source .env
 mkdir -p auth
 docker run \
   --entrypoint htpasswd \
-  registry:2 -Bbn $1 $2 > auth/htpasswd
+  registry -Bbn ${AUTH_HTPASSWD_USER} ${AUTH_HTPASSWD_PASS} >> auth/htpasswd
 
 exit 0
