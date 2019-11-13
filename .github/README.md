@@ -1,4 +1,4 @@
-# Using Docker Registry with Basic Auth and SSL enabled integrated with NGINX proxy and autorenew LetsEncrypt certificates
+# Using Docker Registry with Basic Auth and SSL enabled integrated with NGINX proxy
 
 This docker-compose should be used with WebProxy (the NGINX Proxy):
 
