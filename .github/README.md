@@ -173,3 +173,7 @@ docker image remove registry.domain.com/my-alpine
 ```bash
 docker pull registry.domain.com/my-alpine
 ```
+
+Done!
+
+> If you are planning on using private images consider using a **local registry** instead of public. Please check [https://docs.docker.com/registry/](https://docs.docker.com/registry/)
