@@ -1,4 +1,4 @@
-# Using Docker Registry with SSL enabled integrated with NGINX proxy and autorenew LetsEncrypt certificates
+# Using Docker Registry with Basic Auth and SSL enabled integrated with NGINX proxy and autorenew LetsEncrypt certificates
 
 This docker-compose should be used with WebProxy (the NGINX Proxy):
 
@@ -87,6 +87,10 @@ REGISTRY_FILES_PATH=./../data
 REGISTRY_AUTH_PATH=./auth
 REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
 
+# Login Information
+AUTH_HTPASSWD_USER=your_email@domain.com
+AUTH_HTPASSWD_PASS=very,secret,password123
+
 # Max Log File Size
 LOGGING_OPTIONS_MAX_SIZE=200k
 
@@ -99,7 +103,13 @@ LETSENCRYPT_EMAIL=your_email@domain.com
 
 >This container must use a network connected to your webproxy or the same network of your webproxy.
 
-3. Start your project
+5. Create your *htpasswd* file
+
+```bash
+./bin/make_htpasswd_user.sh
+```
+
+4. Start your project
 
 ```bash
 docker-compose up -d
@@ -119,7 +129,11 @@ Where "nginx-letsencrypt" is the name of your Letsencrypt container settled in t
 
 ## Connecting to your Registry
 
+As we are using Basic Auth you must login to your registry using the *AUTH_HTPASSWD_USER* and *AUTH_HTPASSWD_PASS* you set in your .env file
 
+```bash
+docker login registry.domain.com
+```
 
 ## Testing
 
