@@ -104,7 +104,6 @@ LETSENCRYPT_EMAIL=your_email@domain.com
 ```bash
 docker-compose up -d
 ```
-
 ----
 
 **Be patient** - when you first run a container to get new certificates, it may take a few minutes.
@@ -115,3 +114,48 @@ You could follow the certificate creation running the command:
 docker logs --tail 50 --follow nginx-letsencrypt
 ```
 Where "nginx-letsencrypt" is the name of your Letsencrypt container settled in the proxy.
+
+----
+
+## Connecting to your Registry
+
+
+
+## Testing
+
+> This testing mode was adapted from the docker documentation [https://docs.docker.com/registry/deploying/](https://docs.docker.com/registry/deploying/)
+
+### Copy an image from Docker Hub to your registry
+
+You can pull an image from Docker Hub and push it to your registry. The following example pulls the **alpine** image from Docker Hub and re-tags it as my-alpine, then pushes it to your registry (substitute the url *registry.domain.com* to your correct domain configred in your .env file). Finally, the alpine and my-alpine images are deleted locally and the my-alpine image is pulled from the local registry.
+
+1. Pull the alpine image from Docker Hub
+
+```bash
+docker pull alpine
+```` 
+
+2. Tag the image as registry.domain.com/my-alpine. This creates an additional tag for the existing image. When the first part of the tag is a hostname and port (if applicable), Docker interprets this as the location of a registry, when pushing
+
+```bash
+docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+```
+
+3. Push the image to your registry running at registry.domain.com:
+
+```bash
+docker push registry.domain.com/my-alpine
+```
+
+4. Remove the locally-cached alpine and registry.domain.com/my-alpine images, so that you can test pulling the image from your registry. This does not remove the registry.domain.com/my-alpine image from your registry
+
+```bash
+docker image remove alpine
+docker image remove registry.domain.com/my-alpine
+```
+
+5. Pull the registry.domain.com/my-alpine image from your local registry
+
+```bash
+docker pull registry.domain.com/my-alpine
+```
