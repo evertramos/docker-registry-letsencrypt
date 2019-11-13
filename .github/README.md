@@ -87,6 +87,10 @@ REGISTRY_FILES_PATH=./../data
 REGISTRY_AUTH_PATH=./auth
 REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd
 
+# Login Information
+AUTH_HTPASSWD_USER=your_email@domain.com
+AUTH_HTPASSWD_PASS=very,secret,password123
+
 # Max Log File Size
 LOGGING_OPTIONS_MAX_SIZE=200k
 
@@ -125,7 +129,11 @@ Where "nginx-letsencrypt" is the name of your Letsencrypt container settled in t
 
 ## Connecting to your Registry
 
-As we are using Basic Auth you 
+As we are using Basic Auth you must login to your registry using the *AUTH_HTPASSWD_USER* and *AUTH_HTPASSWD_PASS* you set in your .env file
+
+```bash
+docker login registry.domain.com
+```
 
 ## Testing
 
