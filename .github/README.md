@@ -152,7 +152,7 @@ docker pull alpine
 2. Tag the image as registry.domain.com/my-alpine. This creates an additional tag for the existing image. When the first part of the tag is a hostname and port (if applicable), Docker interprets this as the location of a registry, when pushing
 
 ```bash
-docker tag ubuntu:16.04 localhost:5000/my-ubuntu
+docker tag alpine registry.domain.com/my-alpine
 ```
 
 3. Push the image to your registry running at registry.domain.com:
